@@ -1,1 +1,4 @@
-/* App-level layout and utilities */
+/* App-level styles */
+main {
+  position: relative;
+}
