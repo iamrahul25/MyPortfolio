@@ -15,17 +15,17 @@ export function Hero() {
         {/* Profile image column */}
         <div className="hero__image-col">
           <div className="hero__avatar-wrap">
+            <div className="hero__avatar-ripples" aria-hidden>
+              <span className="hero__avatar-ripple" />
+              <span className="hero__avatar-ripple hero__avatar-ripple--2" />
+              <span className="hero__avatar-ripple hero__avatar-ripple--3" />
+            </div>
             <div className="hero__avatar-ring" />
-            <div className="hero__avatar-ring hero__avatar-ring--2" />
             <img
               src="/static/profile-image.png"
               alt="Rahul Kumar"
               className="hero__avatar"
             />
-            <div className="hero__avatar-badge">
-              <span className="hero__badge-dot" />
-              Available for work
-            </div>
           </div>
         </div>
 
@@ -136,11 +136,11 @@ export function Hero() {
         }
         .hero__avatar-wrap {
           position: relative;
-          width: 220px;
-          height: 220px;
+          width: 160px;
+          height: 160px;
         }
         @media (min-width: 768px) {
-          .hero__avatar-wrap { width: 280px; height: 280px; }
+          .hero__avatar-wrap { width: 200px; height: 200px; }
         }
 
         .hero__avatar-ring {
@@ -152,12 +152,28 @@ export function Hero() {
                       linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3)) border-box;
           animation: spin-slow 8s linear infinite;
         }
-        .hero__avatar-ring--2 {
-          inset: -16px;
-          border-color: rgba(124,58,237,0.2);
-          background: none;
-          border: 1px solid rgba(124,58,237,0.15);
-          animation: spin-slow 14s linear infinite reverse;
+
+        /* Ripple effect (slow, matching star field pace) */
+        .hero__avatar-ripples {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          pointer-events: none;
+          z-index: 0;
+        }
+        .hero__avatar-ripple {
+          position: absolute;
+          inset: 0;
+          border-radius: 50%;
+          border: 2px solid rgba(124,58,237,0.4);
+          animation: avatar-ripple 7.5s ease-out infinite;
+          opacity: 0;
+        }
+        .hero__avatar-ripple--2 { animation-delay: 2.5s; }
+        .hero__avatar-ripple--3 { animation-delay: 5s; }
+        @keyframes avatar-ripple {
+          0% { transform: scale(0.85); opacity: 0.6; }
+          100% { transform: scale(1.8); opacity: 0; }
         }
 
         .hero__avatar {
@@ -170,41 +186,6 @@ export function Hero() {
           z-index: 1;
           border: 3px solid var(--bg);
           box-shadow: 0 0 40px rgba(124,58,237,0.25), 0 0 80px rgba(6,182,212,0.1);
-        }
-
-        .hero__avatar-badge {
-          position: absolute;
-          bottom: 8px;
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 2;
-          background: rgba(8,11,18,0.9);
-          border: 1px solid rgba(34,197,94,0.3);
-          border-radius: var(--radius-full);
-          padding: 0.3rem 0.75rem;
-          font-size: 0.72rem;
-          font-weight: 500;
-          color: #4ade80;
-          white-space: nowrap;
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-          backdrop-filter: blur(8px);
-        }
-        .hero__badge-dot {
-          width: 6px; height: 6px;
-          border-radius: 50%;
-          background: #4ade80;
-          animation: pulse-ring 1.6s ease-out infinite;
-          position: relative;
-        }
-        .hero__badge-dot::after {
-          content: '';
-          position: absolute;
-          inset: -2px;
-          border-radius: 50%;
-          background: rgba(74,222,128,0.3);
-          animation: pulse-ring 1.6s ease-out infinite;
         }
 
         /* ── Content ───────────── */

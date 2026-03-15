@@ -16,19 +16,20 @@ export function Resume() {
       </div>
 
       <div className="resume__card">
-        <div className="resume__card-icon">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-            <polyline points="10 9 9 9 8 9"/>
-          </svg>
-        </div>
-        <div className="resume__card-body">
-          <h3 className="resume__card-title">Resume — 2026</h3>
-          <p className="resume__card-sub">Full-stack Developer · React · Node.js · MongoDB</p>
-          <p className="resume__text">View or download my latest resume to learn more about my experience, skills, and background.</p>
+        <div className="resume__card-top">
+          <div className="resume__card-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+              <polyline points="10 9 9 9 8 9"/>
+            </svg>
+          </div>
+          <div className="resume__card-body">
+            <h3 className="resume__card-title">Resume — 2026</h3>
+            <p className="resume__card-sub">Full-stack Developer · React · Node.js · MongoDB</p>
+          </div>
         </div>
         <div className="resume__actions">
           <a
@@ -65,8 +66,13 @@ export function Resume() {
           overflow: hidden;
           transition: border-color 0.3s, box-shadow 0.3s;
         }
+        .resume__card-top {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
         @media (min-width: 640px) {
-          .resume__card { flex-direction: row; align-items: center; gap: 2rem; }
+          .resume__card-top { flex-direction: row; align-items: center; gap: 2rem; }
         }
         .resume__card::before {
           content: '';
@@ -109,12 +115,6 @@ export function Resume() {
           color: var(--accent2);
           font-family: var(--font-mono);
           margin-bottom: 0.5rem;
-        }
-        .resume__text {
-          color: var(--text-muted);
-          font-size: 0.875rem;
-          max-width: 40ch;
-          line-height: 1.65;
         }
 
         .resume__actions {

@@ -5,24 +5,6 @@ export function About() {
   return (
     <section id="about" className="about">
       <div className="about__grid">
-        {/* Image side */}
-        <div className="about__img-col">
-          <div className="about__img-wrap">
-            <img src="/static/profile-image.png" alt="Rahul Kumar" className="about__img" />
-            <div className="about__img-overlay" />
-            {/* Stats cards */}
-            <div className="about__stat-card about__stat-card--1">
-              <span className="about__stat-num">3+</span>
-              <span className="about__stat-label">Years Coding</span>
-            </div>
-            <div className="about__stat-card about__stat-card--2">
-              <span className="about__stat-num">6+</span>
-              <span className="about__stat-label">Projects Shipped</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Text side */}
         <div className="about__body">
           <div className="section-header">
             <div className="section-label">
@@ -57,80 +39,11 @@ export function About() {
         .about__grid {
           display: flex;
           flex-direction: column;
-          gap: 3rem;
-          align-items: flex-start;
+          align-items: stretch;
         }
-        @media (min-width: 900px) {
-          .about__grid {
-            flex-direction: row;
-            align-items: center;
-            gap: 5rem;
-          }
-          .about__img-col { flex-shrink: 0; }
-          .about__body { flex: 1; }
-        }
-
-        /* ── Image ──────────────── */
-        .about__img-wrap {
-          position: relative;
-          width: 260px;
-          height: 320px;
-          margin: 0 auto;
-        }
-        @media (min-width: 900px) {
-          .about__img-wrap { width: 300px; height: 370px; }
-        }
-
-        .about__img {
+        .about__body {
           width: 100%;
-          height: 100%;
-          object-fit: cover;
-          object-position: top;
-          border-radius: var(--radius-lg);
-          position: relative;
-          z-index: 1;
-          border: 1.5px solid var(--border);
-        }
-        .about__img-overlay {
-          position: absolute;
-          inset: 0;
-          border-radius: var(--radius-lg);
-          background: linear-gradient(to bottom, transparent 50%, rgba(124,58,237,0.25));
-          z-index: 2;
-          pointer-events: none;
-        }
-
-        /* ── Floating stat cards ── */
-        .about__stat-card {
-          position: absolute;
-          z-index: 3;
-          background: rgba(14,17,23,0.9);
-          backdrop-filter: blur(12px);
-          border: 1px solid rgba(124,58,237,0.2);
-          border-radius: var(--radius-sm);
-          padding: 0.6rem 1rem;
-          display: flex;
-          flex-direction: column;
-          gap: 0.1rem;
-          box-shadow: var(--shadow-card);
-          animation: float 6s ease-in-out infinite;
-        }
-        .about__stat-card--1 { bottom: 24px; left: -20px; animation-delay: -2s; }
-        .about__stat-card--2 { top: 32px; right: -24px; animation-delay: -5s; }
-        .about__stat-num {
-          font-size: 1.4rem;
-          font-weight: 800;
-          background: linear-gradient(135deg, var(--accent), var(--accent2));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          line-height: 1;
-        }
-        .about__stat-label {
-          font-size: 0.7rem;
-          color: var(--text-muted);
-          font-family: var(--font-mono);
-          white-space: nowrap;
+          max-width: 100%;
         }
 
         /* ── Paragraphs ─────────── */
@@ -139,7 +52,7 @@ export function About() {
           flex-direction: column;
           gap: 1rem;
           margin-bottom: 2rem;
-          max-width: 48ch;
+          max-width: 72ch;
         }
         .about__paragraphs p {
           color: var(--text-muted);
@@ -152,6 +65,13 @@ export function About() {
           display: flex;
           flex-direction: column;
           gap: 0.65rem;
+        }
+        @media (min-width: 768px) {
+          .about__highlights {
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+          }
         }
         .about__highlight {
           display: flex;

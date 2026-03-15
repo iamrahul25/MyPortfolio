@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 const LINKS = [
   { href: '#hero',     label: 'Home',     icon: '⌂' },
   { href: '#about',    label: 'About',    icon: '◈' },
+  { href: '#projects', label: 'Projects', icon: '◉' },
   { href: '#resume',   label: 'Resume',   icon: '◎' },
   { href: '#skills',   label: 'Skills',   icon: '◆' },
-  { href: '#projects', label: 'Projects', icon: '◉' },
   { href: '#contact',  label: 'Contact',  icon: '◇' },
 ]
 
@@ -71,11 +71,8 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
           ))}
         </ul>
 
-        {/* CTA + Hamburger */}
+        {/* Hamburger */}
         <div className="nav__actions">
-          <a href="#contact" className="nav__cta" onClick={closeMenu}>
-            Hire Me
-          </a>
           <button
             type="button"
             className={`nav__toggle ${mobileMenuOpen ? 'open' : ''}`}
@@ -222,31 +219,11 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
           left: 8px; right: 8px;
         }
 
-        /* ── CTA + hamburger container ─────────────────── */
+        /* ── Hamburger container ───────────────────────── */
         .nav__actions {
           display: flex;
           align-items: center;
           gap: 0.75rem;
-        }
-
-        .nav__cta {
-          display: none;
-          padding: 0.45rem 1.1rem;
-          border-radius: var(--radius-full);
-          background: linear-gradient(135deg, var(--accent), var(--accent2));
-          color: #fff;
-          font-size: 0.85rem;
-          font-weight: 600;
-          text-decoration: none;
-          transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-          box-shadow: 0 0 0 0 var(--accent-glow);
-        }
-        @media (min-width: 768px) { .nav__cta { display: inline-block; } }
-        .nav__cta:hover {
-          opacity: 0.9;
-          transform: translateY(-1px);
-          box-shadow: 0 4px 20px var(--accent-glow);
-          color: #fff;
         }
 
         /* ── Hamburger ─────────────────────────────────── */

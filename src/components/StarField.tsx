@@ -24,17 +24,12 @@ interface StaticStar {
   twinkleOffset: number
 }
 
-// ── Neon color palette ─────────────────────────────────────────
-const NEON_COLORS = [
+// ── Nuro.dev-style: subtle gray/white meteor palette ───────────
+const METEOR_COLORS = [
+  '#f3f4f6',   // gray-100
+  '#e5e7eb',   // gray-200
+  '#d1d5db',   // gray-300
   '#ffffff',   // white
-  '#c4b5fd',   // soft violet
-  '#7c3aed',   // vivid violet
-  '#06b6d4',   // cyan
-  '#38d9f5',   // bright cyan
-  '#f472b6',   // pink
-  '#a78bfa',   // light purple
-  '#67e8f9',   // ice blue
-  '#e879f9',   // magenta
 ]
 
 // ── Helpers ────────────────────────────────────────────────────
@@ -42,8 +37,8 @@ function rand(a: number, b: number) {
   return a + Math.random() * (b - a)
 }
 
-function randomColor() {
-  return NEON_COLORS[Math.floor(Math.random() * NEON_COLORS.length)]
+function randomMeteorColor() {
+  return METEOR_COLORS[Math.floor(Math.random() * METEOR_COLORS.length)]
 }
 
 // ── Fixed direction: ALL meteors share the same angle → parallel lines ──
@@ -54,14 +49,14 @@ const METEOR_DX = Math.cos(METEOR_ANGLE_RAD)  // -0.5
 const METEOR_DY = Math.sin(METEOR_ANGLE_RAD)  // +0.866
 
 function spawnMeteor(w: number, _h: number): Meteor {
-  // Spawn across the FULL top edge + some off the right side so leftward-moving
-  // meteors that start off-right still cross the visible area.
-  const x = rand(-60, w + 200)
-  const y = rand(-150, -5)     // always above the canvas → falls in
+  // Spawn across full width + overflow so left, center, and right all get falling stars (meteors move left).
+  const x = rand(-80, w + 240)
+  const y = rand(-55, -12)
 
-  // Each meteor gets its OWN speed — slow to fast — but the same direction.
-  const speed  = rand(1.5, 9)
-  const trailLen = Math.floor(rand(20, 60))
+  // Each meteor gets its OWN speed — same direction (nuro-style slow). 200% slower = 3x slower.
+  const speed  = rand(0.5, 0.67)
+  // Trail length 2–3x longer with high variance: some short, some very long
+  const trailLen = Math.floor(rand(18, 88))
 
   return {
     x,
@@ -70,9 +65,9 @@ function spawnMeteor(w: number, _h: number): Meteor {
     vy: METEOR_DY * speed,   // always positive → always falls DOWN
     trailLen,
     speed,
-    opacity: rand(0.5, 1),
-    width: rand(0.8, 2.2),
-    color: randomColor(),
+    opacity: rand(0.6, 1),
+    width: rand(0.5, 1.2),   // thin trail like nuro (h-0.5 ≈ 2px)
+    color: randomMeteorColor(),
     trail: [],
     dead: false,
   }
@@ -127,7 +122,7 @@ export function StarField() {
         y: Math.random() * H,
         r: rand(0.3, 1.4),
         opacity: rand(0.08, 0.55),
-        twinkleSpeed: rand(0.006, 0.02),
+        twinkleSpeed: rand(0.002, 0.0067),
         twinkleOffset: Math.random() * Math.PI * 2,
       }))
     }
@@ -143,49 +138,47 @@ export function StarField() {
       }
     }
 
-    // ── Draw one meteor ──────────────────────────────────
+    // ── Draw one meteor (nuro.dev style: gradient trail + small head) ──
     function drawMeteor(m: Meteor) {
       if (m.trail.length < 2) return
       const [r, g, b] = hexToRgb(m.color)
       const n = m.trail.length
-
-      for (let i = 1; i < n; i++) {
-        const t     = i / n                          // 0=tail end, 1=head
-        const alpha = t * m.opacity
-        const lw    = m.width * t
-
-        ctx!.beginPath()
-        ctx!.moveTo(m.trail[i - 1].x, m.trail[i - 1].y)
-        ctx!.lineTo(m.trail[i].x,     m.trail[i].y)
-        ctx!.strokeStyle = `rgba(${r},${g},${b},${alpha.toFixed(3)})`
-        ctx!.lineWidth   = lw
-        ctx!.lineCap     = 'round'
-        ctx!.stroke()
-      }
-
-      // Glowing head flare
+      const tail = m.trail[0]
       const head = m.trail[n - 1]
-      const flareR = m.width * 6
-      const grad = ctx!.createRadialGradient(head.x, head.y, 0, head.x, head.y, flareR)
-      grad.addColorStop(0,   `rgba(${r},${g},${b},${(m.opacity * 0.85).toFixed(3)})`)
-      grad.addColorStop(0.35,`rgba(${r},${g},${b},${(m.opacity * 0.25).toFixed(3)})`)
-      grad.addColorStop(1,   `rgba(${r},${g},${b},0)`)
+
+      // Trail: linear gradient from tail (transparent) to head (bright), like nuro's before:from-gray-300 before:to-transparent
+      const trailGrad = ctx!.createLinearGradient(tail.x, tail.y, head.x, head.y)
+      trailGrad.addColorStop(0, `rgba(${r},${g},${b},0)`)
+      trailGrad.addColorStop(0.15, `rgba(${r},${g},${b},${(m.opacity * 0.15).toFixed(3)})`)
+      trailGrad.addColorStop(0.6, `rgba(${r},${g},${b},${(m.opacity * 0.6).toFixed(3)})`)
+      trailGrad.addColorStop(1, `rgba(${r},${g},${b},${(m.opacity * 0.95).toFixed(3)})`)
+
       ctx!.beginPath()
-      ctx!.arc(head.x, head.y, flareR, 0, Math.PI * 2)
-      ctx!.fillStyle = grad
+      ctx!.moveTo(tail.x, tail.y)
+      for (let i = 1; i < n; i++) ctx!.lineTo(m.trail[i].x, m.trail[i].y)
+      ctx!.strokeStyle = trailGrad
+      ctx!.lineWidth = m.width
+      ctx!.lineCap = 'round'
+      ctx!.lineJoin = 'round'
+      ctx!.stroke()
+
+      // Small head dot (nuro: h-0.5 w-0.5 rounded-full — tiny bright dot)
+      const headR = Math.max(0.5, m.width * 0.8)
+      ctx!.beginPath()
+      ctx!.arc(head.x, head.y, headR, 0, Math.PI * 2)
+      ctx!.fillStyle = `rgba(${r},${g},${b},${m.opacity})`
       ctx!.fill()
     }
 
-    // ── Spawn timing ─────────────────────────────────────
+    // ── Spawn timing (lower density) ─────────────────────────
     let spawnTimer = 0
-    const BASE_INTERVAL = 22   // frames between spawns
+    const BASE_INTERVAL = 42   // fewer spawns = lower density
 
-    // Seed some meteors at various stages so screen isn't empty at start
+    // Seed meteors across full width so right side isn’t empty at start
     function seedInitialMeteors() {
-      for (let i = 0; i < 7; i++) {
+      for (let i = 0; i < 4; i++) {
         const m = spawnMeteor(W, H)
-        // Pre-advance each meteor a random amount so they're mid-trail
-        const preSteps = Math.floor(rand(5, 80))
+        const preSteps = Math.floor(rand(5, 75))
         for (let s = 0; s < preSteps; s++) {
           m.x += m.vx
           m.y += m.vy
@@ -208,13 +201,7 @@ export function StarField() {
       if (spawnTimer >= BASE_INTERVAL) {
         spawnTimer = 0
         meteors.push(spawnMeteor(W, H))
-        // Occasional burst of 2-3 close together
-        if (Math.random() < 0.18) {
-          setTimeout(() => meteors.push(spawnMeteor(W, H)), 100)
-          if (Math.random() < 0.5) {
-            setTimeout(() => meteors.push(spawnMeteor(W, H)), 220)
-          }
-        }
+        if (Math.random() < 0.1) setTimeout(() => meteors.push(spawnMeteor(W, H)), 120)
       }
 
       // Update & render meteors
