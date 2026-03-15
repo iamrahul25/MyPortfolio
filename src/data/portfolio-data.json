@@ -1,0 +1,83 @@
+{
+  "about": {
+    "name": "Rahul Kumar",
+    "aboutMe": [
+      "I'm a developer based in India, building full‑stack applications with React, Node.js, and React Native. I focus on clean code, solid UX, and shipping things that work.",
+      "From civic reporting platforms and habit trackers to real-time video chat and GPS alerts, I enjoy turning ideas into working products. Open to collaboration and new opportunities—say hi!"
+    ]
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "tagline": "Full‑stack developer · React, Node.js, MongoDB & Express",
+    "primaryCta": "View work",
+    "primaryCtaHref": "#projects",
+    "secondaryCta": "Get in touch",
+    "secondaryCtaHref": "#contact"
+  },
+  "socialMedia": {
+    "linkedin": "https://www.linkedin.com/in/iamrahul25/",
+    "github": "https://github.com/iamrahul25",
+    "twitter": "",
+    "email": ""
+  },
+  "skills": [
+    "React",
+    "React Native",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Firebase",
+    "Socket.io",
+    "WebRTC",
+    "Git",
+    "REST APIs"
+  ],
+  "projects": [
+    {
+      "title": "Pin-it",
+      "description": "Civic issue reporting platform where users can pin and report local issues on a map. Built for community engagement and transparent municipal feedback.",
+      "link": "https://pin-it-jade.vercel.app/",
+      "image": "https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=80",
+      "tags": ["MongoDB", "Express", "React", "Node.js"]
+    },
+    {
+      "title": "Any Connect",
+      "description": "Real-time video chat application with WebRTC for peer-to-peer calls. Join rooms, talk, play games and connect with others instantly.",
+      "link": "https://anyconnectfrontend.vercel.app/",
+      "image": "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=800&q=80",
+      "tags": ["MERN", "Socket.io", "WebRTC"]
+    },
+    {
+      "title": "FOF - Find Old Friend",
+      "description": "Platform to reconnect with old friends. User accounts, visitor stats, and donation tracking. Every new friend is a new adventure.",
+      "link": "https://fof-website.onrender.com/",
+      "image": "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80",
+      "tags": ["React", "Node.js", "MongoDB", "Express", "JWT"]
+    },
+    {
+      "title": "Habit Maker",
+      "description": "Daily habit tracker and todo app to build better routines. Track streaks, set goals, and stay consistent with a clean, focused interface.",
+      "link": "https://todo-daily-rahul.netlify.app/",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80",
+      "tags": ["React", "Firebase"]
+    },
+    {
+      "title": "Task Prioritizer",
+      "description": "Smart task management tool that helps you prioritize and focus on what matters. Organize, rank, and complete tasks with clarity.",
+      "link": "https://task-prioritizer.vercel.app/",
+      "image": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=800&q=80",
+      "tags": ["React", "Firebase"]
+    },
+    {
+      "title": "GPS Alert",
+      "description": "GPS Alarm or GPS Alert — mobile app for location-based alerts and notifications. Built with React Native.",
+      "link": "https://github.com/iamrahul25/GpsAlert",
+      "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
+      "tags": ["React Native", "JavaScript", "Expo"]
+    }
+  ],
+  "contact": {
+    "message": "I'm open to new opportunities and conversations. Reach out via email or connect on LinkedIn and GitHub."
+  }
+}

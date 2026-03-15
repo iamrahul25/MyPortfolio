@@ -1,0 +1,35 @@
+# Vite build output
+dist
+dist-ssr
+*.local
+
+# Dependencies
+node_modules
+
+# Logs and caches
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.cache
+.parcel-cache
+.vite
+
+# Editor and OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# TypeScript
+*.tsbuildinfo
+
+# Env and secrets
+.env
+.env.*
+!.env.example
