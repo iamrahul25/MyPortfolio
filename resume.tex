@@ -1,0 +1,303 @@
+%-------------------------
+% Resume in Latex
+% Author
+% License : MIT
+%------------------------
+
+%---- Required Packages and Functions ----
+
+\documentclass[a4paper,11pt]{article}
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage{fontawesome5}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{cfr-lm}
+\usepackage[T1]{fontenc}
+\setlength{\multicolsep}{0pt} 
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\geometry{left=1.4cm, top=0.8cm, right=1.2cm, bottom=1cm}
+% Adjust margins
+%\addtolength{\oddsidemargin}{-0.5in}
+%\addtolength{\evensidemargin}{-0.5in}
+%\addtolength{\textwidth}{1in}
+\usepackage[most]{tcolorbox}
+\tcbset{
+	frame code={}
+	center title,
+	left=0pt,
+	right=0pt,
+	top=0pt,
+	bottom=0pt,
+	colback=gray!20,
+	colframe=white,
+	width=\dimexpr\textwidth\relax,
+	enlarge left by=-2mm,
+	boxsep=4pt,
+	arc=0pt,outer arc=0pt,
+}
+
+\urlstyle{same}
+
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-7pt}]
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2 \vspace{-0.5mm}}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        {#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
+    \end{tabular*}
+    \vspace{-2mm}
+}
+
+\newcommand{\resumeSubheading}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#4}} \\
+        \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeProject}[4]{
+\vspace{0.5mm}\item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+        \textbf{#1} & \textit{\footnotesize{#3}} \\
+        \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+    \vspace{-2.4mm}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
+% \renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=0mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1.7mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\begin{justify}\begin{itemize}[leftmargin=3ex, rightmargin=2ex, noitemsep,labelsep=1.2mm,itemsep=0mm]\small}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}\vspace{2mm}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}\vspace{-2mm}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\end{justify}\vspace{-2mm}}
+\newcommand{\cvsection}[1]{%
+\vspace{2mm}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+    \vspace{-4mm}
+}
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+%---- End of Packages and Functions ------
+
+%-------------------------------------------
+%%%%%%  CV STARTS HERE  %%%%%%%%%%%
+%%%%%% DEFINE ELEMENTS HERE %%%%%%%
+\newcommand{\name}{Rahul Kumar} % Your Name
+\newcommand{\course}{Computer Science and Engineering} % Your Program
+\newcommand{\roll}{10714802720} % Your Roll No.
+\newcommand{\phone}{} % Your Phone Number
+\newcommand{\emaila}{connectrahul25@gmail.com} %Email 1
+
+\begin{document}
+\fontfamily{cmr}\selectfont
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape Rahul Kumar} \\ \vspace{8pt}
+    \small \faPhone{} +91-xxxx $|$ \href{mailto:connectrahul25@gmail.com}{\faEnvelope{} \underline{connectrahul25@gmail.com}} $|$ 
+    \href{https://linkedin.com/in/iamrahul25}{\faLinkedin{} \underline{https://linkedin.com/in/iamrahul25}} $|$
+    \href{https://github.com/iamrahul25}{\faGithub{} \underline{GitHub}} $|$ 
+    \href{https://leetcode.com/iamrahul25}{\faCode{} \underline{LeetCode}}
+\end{center}
+
+
+%-----------EDUCATION-----------
+\section{\textbf{EDUCATION}}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      { Bachelor of Technology (B.Tech) in Computer Science and Engineering (CSE)}{9.1 CGPA}
+      {Maharaja Agrasen Institute of Technology (MAIT), Delhi}{2020 - 2024}
+      {\footnotesize Relevant coursework: DSA, OOPS, DBMS, OS, CN}
+  \resumeSubHeadingListEnd
+\vspace{-5.5mm}
+%
+
+
+
+%-----------EXPERIENCE-----------------
+\section{\textbf{EXPERIENCE}}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      { IBM}{\textbf{Bengaluru}}
+      {\textbf{Dev-Ops}}{Oct 2024 - Present}
+      \vspace{-2.0mm}
+      \resumeItemListStart
+      
+        \item {Automated pre-deployment and post-deployment validation checks using Python and shell scripts reducing manual verification time by 80\% and improving deployment reliability.}
+
+        % Before doing the depoyment -> Prechecks ensure all the hardware components are connected and working properly (IP's, MAC address, Drives (NVME, SSD), BMC, RAM, Motherboard, etc) 
+
+        % After doing the deployment the there were 15-20 post-checks validation for which we have to follow the SOP for doing so, I automated all teh 15-20 checks using python and shell script. And script run the all post validation check and at the end give a summary of report what is failing and why is failing what to do. 
+        
+        % So, script overall helped in saving lot's of time. Earlier post deployment checks take around 30-60 mins and the script take only 3-5 mins to do the same things with much more accurracy to find if a particular post check is failing. 
+        
+        
+        \item {Developed automation scripts in Python to detect gaps and mismatches between configuration/data in GitHub repositories and deployed servers, ensuring environment consistency and preventing drift-related issues.}
+
+        % For eg: The server & its software and hardware data is spread across various platform and github repo's and sometimes when there are changes of change in hardware and software data. So, to avoid inconsistency developed a python automation script which validate the data present at inveontory, github repos, and with the actual server data. (Avoid various future deployment failure, insconsits, find so many gaps, corrected it) 
+
+        \item {Developed various dashboards for end-to-end observability, visualizing key metrics such as CPU usage, memory, disk I/O, and application logs to monitor system health and performance in real time.}
+        
+        \item \textbf{Skills acquired:} {Python, Bash, Docker, Kubernetes, Ansible, Prometheus \& Graphana}
+      \resumeItemListEnd
+    \vspace{-3.0mm}
+    
+    
+    \resumeSubheading
+      { Internship at DRDO (Defence Research \& Development Organisation)}{\textbf{Delhi}}
+      {\textbf{Web-dev Intern}}{Dec 2022 - March 2023}
+      \vspace{-2.0mm}
+      \resumeItemListStart
+        \item {Worked on DSpace, an open-source repository software, to manage the digital assets of the DRDO organization.}
+        \item {Developed Institutional Repository (IR) software used for managing documents, research papers, and other assets. }
+        \item \textbf{Technology used:} {Java, JSP, XML, SQL, HTML, and CSS during the internship.}
+        \item {Learned various soft skills such as leadership, teamwork, handling pressure, and effective communication.}
+      \resumeItemListEnd
+    \vspace{-3.0mm}
+  \resumeSubHeadingListEnd
+\vspace{-5.5mm}
+
+
+
+
+%-----------PROJECTS-----------------
+\section{\textbf{PROJECTS}}
+\resumeSubHeadingListStart
+
+    \resumeProject
+      { Pin It} %Project Name
+      {Civic issue reporting platform where users can pin and report local issues on a map. Build for NGO's and people.} %Project Name, Location Name
+      {} %Event Dates
+      {}
+      \resumeItemListStart
+        \item {Full-stack web application enabling users to report and visualize local civic issues on an interactive map for community engagement and municipal feedback.}
+        \item {Technology Used: MongoDB, Express, React, Node.js (MERN stack)}
+        \item {\textbf{Project Link:} \href{https://pin-it-jade.vercel.app/} {\underline{https://pin-it-jade.vercel.app/}}} $|$ \textbf{Github Link:} \href{https://github.com/iamrahul25/PinIt} {\underline{https://github.com/iamrahul25/PinIt}}
+    \resumeItemListEnd
+
+    \resumeProject
+      { Any Connect (Oolo)} %Project Name
+      {Real-time video chat application with WebRTC for peer-to-peer calls. Join rooms, talk, play games and connect with others instantly.} %Project Name, Location Name
+      {} %Event Dates
+      {}
+      \resumeItemListStart
+        \item {Built real-time video chat with WebRTC for peer-to-peer calls; users can join rooms, communicate, and play games with low-latency connectivity.}
+        \item {Technology Used: MERN stack, Socket.io, WebRTC}
+        \item {\textbf{Project Link:} \href{https://anyconnectfrontend.vercel.app/} {\underline{https://anyconnectfrontend.vercel.app/}}} $|$ \textbf{Github Link:} \href{https://github.com/iamrahul25/Oolo} {\underline{https://github.com/iamrahul25/Oolo}}
+    \resumeItemListEnd
+
+    \resumeProject
+      { FOF - (Find Old Friends) } %Project Name
+      {A website that helps you reconnect with your long lost friends} %Project Name, Location Name
+      {June 2023 - July 2023} %Event Dates
+      {}
+      \resumeItemListStart
+        \item {It is a full-stack web application built using the MERN stack. Users can reconnect with their childhood school friends by providing details of class name, school name, academic year and place of school.}
+        \item {Team Project - 3 Members}
+        \item {Technology Used: React.js, JavaScript, HTML, CSS, Node.js, Express.js, MongoDB}
+        \item {\textbf{Project Link:} \href{https://fof-website.onrender.com/} {\underline{https://fof-website.onrender.com/}}} $|$ \textbf{Github Link:} \href{https://github.com/iamrahul25/fofmern} {\underline{https://github.com/iamrahul25/fofmern}}
+    \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+\vspace{-5mm}
+
+
+
+
+%-----------Technical skills-----------------
+\section{\textbf{TECHNICAL SKILLS}}
+\begin{itemize}[leftmargin=0.05in, label={}]
+    \small{
+    \item{
+        \begin{tabular}{ @{} p{4cm} p{11cm} @{} }
+            \textbf{Languages:} & C, C++, Java, Python \\[4pt]
+            \textbf{Frontend Technologies:} & HTML, CSS, JavaScript, React.js, Next.js, Tailwind \\[4pt]
+            \textbf{Backend Technologies:} & Node.js, Express.js, RESTful APIs, JWT Authentication \\[4pt]
+            \textbf{Database Management:} & SQL (MySQL), MongoDB, Firebase \\[4pt]
+        \end{tabular}
+    }}
+\end{itemize}
+\vspace{-16pt}
+
+
+%-----------Achievements----------------------------------
+\section{\textbf{ACHIEVEMENTS}}
+
+\vspace{2mm}
+
+ \begin{itemize}[leftmargin=0.05in, label={}]
+ 
+    \item{
+     {• \textbf{6 Stars} in Problem Solving (HackerRank)} {\href{https://www.hackerrank.com/iamrahul25} {(\underline{Link})}} \\[4pt]
+     
+     {• \textbf{650+} DSA Questions on Leetcode} {\href{https://leetcode.com/iamrahul25/} {(\underline{Link})}} \\[4pt]
+
+     {• \textbf{3 Stars} in CodeChef} {\href{https://www.codechef.com/users/rahulkr25} {(\underline{Link})}} \\[4pt]
+     
+     {• Participated in \textbf{HackVSIT Hackathon}} \\[4pt]
+     
+    }
+ \end{itemize}
+
+%-----------Certifications----------------------------------
+\section{\textbf{CERTIFICATIONS}}
+
+\vspace{2mm}
+ \begin{itemize}[leftmargin=0.05in, label={}]
+    \item{
+     {• \textbf{Data Structures A-Z:} Data Structures and Algorithms Bootcamp (Udemy) (Sep 2024)} {\href{https://udemy-certificate.s3.amazonaws.com/pdf/UC-7551de0c-1fe8-4ce5-b5d2-2abab03991be.pdf} {(\underline{Link})}} \\[4pt]
+    }
+    \item{
+     {• \textbf{Wipro TalentNext Java Full Stack Certification} (May 2023)} {\href{https://cert.diceid.com/csr/cid/xDaKXD} {(\underline{Link})}} \\[4pt]
+    }
+    \item{
+     {• \textbf{React (The Complete Guide)} (Udemy) (Oct 2022)} {\href{https://udemy-certificate.s3.amazonaws.com/pdf/UC-4735e8c3-14c2-4ce0-a62a-981104fb9ff9.pdf} {(\underline{Link})}} \\[4pt]
+    }
+ \end{itemize}
+
+
+ \vspace{-10pt}
+ 
+\end{document}

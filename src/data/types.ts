@@ -25,6 +25,10 @@ export interface PortfolioData {
     image?: string
     tags: string[]
   }[]
+  resume: {
+    pdfUrl: string
+    fileName: string
+  }
   contact: {
     message: string
   }
