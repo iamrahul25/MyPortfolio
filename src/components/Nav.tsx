@@ -1,12 +1,20 @@
 import { useEffect, useState } from 'react'
 
+declare global {
+  interface Window {
+    lucide?: {
+      createIcons?: () => void
+    }
+  }
+}
+
 const LINKS = [
-  { href: '#hero',     label: 'Home',     icon: '⌂' },
-  { href: '#about',    label: 'About',    icon: '◈' },
-  { href: '#projects', label: 'Projects', icon: '◉' },
-  { href: '#resume',   label: 'Resume',   icon: '◎' },
-  { href: '#skills',   label: 'Skills',   icon: '◆' },
-  { href: '#contact',  label: 'Contact',  icon: '◇' },
+  { href: '#hero',     label: 'Home',     icon: 'home' },
+  { href: '#about',    label: 'About',    icon: 'info' },
+  { href: '#projects', label: 'Projects', icon: 'folder' },
+  { href: '#resume',   label: 'Resume',   icon: 'file-text' },
+  { href: '#skills',   label: 'Skills',   icon: 'code' },
+  { href: '#contact',  label: 'Contact',  icon: 'mail' },
 ]
 
 interface NavProps {
@@ -21,6 +29,11 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? 'hidden' : ''
   }, [mobileMenuOpen])
+
+  useEffect(() => {
+    // Convert all `[data-lucide]` placeholders into inline SVG icons.
+    window.lucide?.createIcons?.()
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -80,9 +93,16 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
             aria-expanded={mobileMenuOpen}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
-            <span />
-            <span />
-            <span />
+            <i
+              className="nav__toggle-icon nav__toggle-icon--menu"
+              data-lucide="menu"
+              aria-hidden="true"
+            />
+            <i
+              className="nav__toggle-icon nav__toggle-icon--x"
+              data-lucide="x"
+              aria-hidden="true"
+            />
           </button>
         </div>
       </nav>
@@ -109,7 +129,9 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
                 className={`nav__drawer-link ${activeSection === href.slice(1) ? 'active' : ''}`}
                 onClick={closeMenu}
               >
-                <span className="nav__drawer-icon">{icon}</span>
+                <span className="nav__drawer-icon" aria-hidden="true">
+                  <i data-lucide={icon} />
+                </span>
                 {label}
                 <span className="nav__drawer-arrow">→</span>
               </a>
@@ -234,6 +256,7 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
           gap: 5px;
           width: 38px;
           height: 38px;
+          color: var(--text);
           background: rgba(255,255,255,0.05);
           border: 1px solid var(--border-muted);
           border-radius: var(--radius-sm);
@@ -254,9 +277,39 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
           border-radius: 2px;
           transition: transform 0.3s ease, opacity 0.3s ease, width 0.3s ease;
         }
-        .nav__toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .nav__toggle.open span:nth-child(2) { opacity: 0; width: 50%; }
-        .nav__toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .nav__toggle-icon {
+          display: inline-flex;
+          width: 100%;
+          height: 100%;
+          align-items: center;
+          justify-content: center;
+          line-height: 0;
+          opacity: 0;
+          transform: scale(0.98);
+          transition: opacity 0.18s ease, transform 0.18s ease;
+          position: absolute;
+          inset: 0;
+        }
+        .nav__toggle-icon svg {
+          width: 20px;
+          height: 20px;
+        }
+        .nav__toggle {
+          position: relative;
+        }
+        .nav__toggle-icon--menu { opacity: 1; transform: scale(1); }
+        .nav__toggle.open .nav__toggle-icon--menu {
+          opacity: 0;
+          transform: scale(0.98);
+        }
+        .nav__toggle.open .nav__toggle-icon--x {
+          opacity: 1;
+          transform: scale(1);
+        }
+        .nav__toggle-icon--x {
+          opacity: 0;
+          transform: scale(0.98);
+        }
 
         /* ── Backdrop ──────────────────────────────────── */
         .nav__backdrop {
@@ -341,10 +394,20 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
         }
         .nav__drawer-link.active { color: var(--accent2); }
         .nav__drawer-icon {
-          font-size: 1rem;
           width: 22px;
-          text-align: center;
+          flex-shrink: 0;
           color: var(--accent);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .nav__drawer-icon i {
+          line-height: 0;
+          display: inline-flex;
+        }
+        .nav__drawer-icon svg {
+          width: 18px;
+          height: 18px;
         }
         .nav__drawer-arrow {
           margin-left: auto;

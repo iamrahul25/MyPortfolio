@@ -48,7 +48,7 @@ const METEOR_ANGLE_RAD = (120 * Math.PI) / 180
 const METEOR_DX = Math.cos(METEOR_ANGLE_RAD)  // -0.5
 const METEOR_DY = Math.sin(METEOR_ANGLE_RAD)  // +0.866
 
-function spawnMeteor(w: number, _h: number): Meteor {
+function spawnMeteor(w: number): Meteor {
   // Spawn across full width + overflow so left, center, and right all get falling stars (meteors move left).
   const x = rand(-80, w + 240)
   const y = rand(-55, -12)
@@ -177,7 +177,7 @@ export function StarField() {
     // Seed meteors across full width so right side isn’t empty at start
     function seedInitialMeteors() {
       for (let i = 0; i < 4; i++) {
-        const m = spawnMeteor(W, H)
+        const m = spawnMeteor(W)
         const preSteps = Math.floor(rand(5, 75))
         for (let s = 0; s < preSteps; s++) {
           m.x += m.vx
@@ -200,8 +200,8 @@ export function StarField() {
       spawnTimer++
       if (spawnTimer >= BASE_INTERVAL) {
         spawnTimer = 0
-        meteors.push(spawnMeteor(W, H))
-        if (Math.random() < 0.1) setTimeout(() => meteors.push(spawnMeteor(W, H)), 120)
+        meteors.push(spawnMeteor(W))
+        if (Math.random() < 0.1) setTimeout(() => meteors.push(spawnMeteor(W)), 120)
       }
 
       // Update & render meteors

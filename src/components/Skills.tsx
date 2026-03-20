@@ -1,4 +1,13 @@
+import { useEffect } from 'react'
 import { data } from '../data'
+
+declare global {
+  interface Window {
+    lucide?: {
+      createIcons?: () => void
+    }
+  }
+}
 
 // Map skill names to a color category for visual variety
 const CATEGORY_MAP: Record<string, string> = {
@@ -18,7 +27,31 @@ const CATEGORY_MAP: Record<string, string> = {
   'REST APIs': 'cyan',
 }
 
+// Map skill names to Lucide icon names (Lucide is loaded via CDN in `index.html`)
+const SKILL_ICON_MAP: Record<string, string> = {
+  React: 'atom',
+  JavaScript: 'code',
+  TypeScript: 'code',
+  'Node.js': 'server',
+  Express: 'rocket',
+  MongoDB: 'database',
+  SQL: 'database',
+  Python: 'code',
+  'C/C++': 'cpu',
+  // Lucide doesn't have a "Firebase brand" icon; use a cloud icon to represent it.
+  Firebase: 'cloud',
+  'Socket.io': 'network',
+  WebRTC: 'video',
+  Git: 'git-branch',
+  'REST APIs': 'link',
+}
+
 export function Skills() {
+  useEffect(() => {
+    // Convert all `[data-lucide]` placeholders into inline SVG icons.
+    window.lucide?.createIcons?.()
+  }, [])
+
   return (
     <section id="skills" className="skills">
       <div className="section-header">
@@ -32,9 +65,14 @@ export function Skills() {
       <ul className="skills__list">
         {data.skills.map((skill) => {
           const cat = CATEGORY_MAP[skill] || 'slate'
+          const iconName = SKILL_ICON_MAP[skill] || 'code'
           return (
             <li key={skill} className={`skills__item skills__item--${cat}`}>
-              <span className="skills__dot" />
+              <i
+                className="skills__icon"
+                data-lucide={iconName}
+                aria-hidden="true"
+              />
               {skill}
             </li>
           )
@@ -52,10 +90,10 @@ export function Skills() {
         .skills__item {
           display: inline-flex;
           align-items: center;
-          gap: 0.45rem;
-          padding: 0.5rem 1.1rem;
+          gap: 0.33rem;
+          padding: 0.3rem 0.66rem;
           border-radius: var(--radius-full);
-          font-size: 0.875rem;
+          font-size: 0.7rem;
           font-weight: 500;
           border: 1px solid;
           transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
@@ -79,6 +117,18 @@ export function Skills() {
           width: 6px; height: 6px;
           border-radius: 50%;
           flex-shrink: 0;
+        }
+
+        .skills__icon {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          line-height: 0;
+          flex-shrink: 0;
+        }
+        .skills__icon svg {
+          width: 16px;
+          height: 16px;
         }
 
         /* Color variants */
