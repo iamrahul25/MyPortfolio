@@ -20,9 +20,11 @@ const LINKS = [
 interface NavProps {
   mobileMenuOpen: boolean
   setMobileMenuOpen: (open: boolean) => void
+  isDark: boolean
+  toggleTheme: () => void
 }
 
-export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
+export function Nav({ mobileMenuOpen, setMobileMenuOpen, isDark, toggleTheme }: NavProps) {
   const [scrolled, setScrolled] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
 
@@ -84,8 +86,41 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
           ))}
         </ul>
 
-        {/* Hamburger */}
+        {/* Actions: Theme Toggle + Hamburger */}
         <div className="nav__actions">
+          {/* Theme Toggle */}
+          <button
+            type="button"
+            className={`nav__theme-toggle ${isDark ? 'dark' : 'light'}`}
+            onClick={toggleTheme}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            <span className="nav__theme-track">
+              <span className="nav__theme-thumb">
+                {isDark ? (
+                  /* Moon */
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                  </svg>
+                ) : (
+                  /* Sun */
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                  </svg>
+                )}
+              </span>
+            </span>
+          </button>
+
           <button
             type="button"
             className={`nav__toggle ${mobileMenuOpen ? 'open' : ''}`}
@@ -120,6 +155,39 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
             <p className="nav__drawer-name">Rahul Kumar</p>
             <p className="nav__drawer-role">Full-Stack Developer</p>
           </div>
+        </div>
+
+        {/* Theme toggle inside drawer */}
+        <div className="nav__drawer-theme">
+          <span className="nav__drawer-theme-label">{isDark ? '🌙 Dark Mode' : '☀️ Light Mode'}</span>
+          <button
+            type="button"
+            className={`nav__theme-toggle ${isDark ? 'dark' : 'light'}`}
+            onClick={toggleTheme}
+            aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+          >
+            <span className="nav__theme-track">
+              <span className="nav__theme-thumb">
+                {isDark ? (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                  </svg>
+                ) : (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/>
+                    <line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/>
+                    <line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                  </svg>
+                )}
+              </span>
+            </span>
+          </button>
         </div>
         <ul className="nav__drawer-links">
           {LINKS.map(({ href, label, icon }) => (
@@ -160,6 +228,11 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
           border-bottom: 1px solid rgba(124, 58, 237, 0.15);
           box-shadow: 0 4px 32px rgba(0,0,0,0.4);
           padding: 0.65rem 1.75rem;
+        }
+        [data-theme="light"] .nav--scrolled {
+          background: rgba(245, 246, 250, 0.88);
+          border-bottom: 1px solid rgba(124, 58, 237, 0.12);
+          box-shadow: 0 4px 32px rgba(0,0,0,0.08);
         }
 
         /* ── Brand ─────────────────────────────────────── */
@@ -421,6 +494,73 @@ export function Nav({ mobileMenuOpen, setMobileMenuOpen }: NavProps) {
         .nav__drawer-link.active .nav__drawer-arrow {
           opacity: 1;
           transform: translateX(0);
+        }
+
+        /* ── Drawer theme row ──────────────────────────── */
+        .nav__drawer-theme {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.75rem 1rem;
+          border-radius: var(--radius-sm);
+          border: 1px solid var(--border-muted);
+          background: rgba(124,58,237,0.04);
+        }
+        .nav__drawer-theme-label {
+          font-size: 0.9rem;
+          font-weight: 500;
+          color: var(--text-muted);
+        }
+
+        /* ── Theme Toggle Pill ─────────────────────────── */
+        .nav__theme-toggle {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+          display: inline-flex;
+          align-items: center;
+        }
+        .nav__theme-track {
+          display: flex;
+          align-items: center;
+          width: 52px;
+          height: 28px;
+          border-radius: 9999px;
+          padding: 3px;
+          position: relative;
+          transition: background 0.35s ease, box-shadow 0.35s ease;
+          box-shadow: inset 0 2px 6px rgba(0,0,0,0.25);
+        }
+        .nav__theme-toggle.dark .nav__theme-track {
+          background: linear-gradient(135deg, #312e81, #1e3a55);
+        }
+        .nav__theme-toggle.light .nav__theme-track {
+          background: linear-gradient(135deg, #fbbf24, #f59e0b);
+          box-shadow: inset 0 2px 6px rgba(0,0,0,0.10), 0 0 12px rgba(251,191,36,0.35);
+        }
+        .nav__theme-thumb {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 22px;
+          height: 22px;
+          border-radius: 9999px;
+          background: #fff;
+          box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+          position: absolute;
+          transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.35s ease;
+          color: #4a5568;
+        }
+        .nav__theme-toggle.dark .nav__theme-thumb {
+          transform: translateX(0px);
+          color: #7c3aed;
+          background: #f0e6ff;
+        }
+        .nav__theme-toggle.light .nav__theme-thumb {
+          transform: translateX(24px);
+          color: #d97706;
+          background: #fff;
         }
       `}</style>
     </>

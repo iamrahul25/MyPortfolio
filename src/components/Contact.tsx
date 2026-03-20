@@ -183,6 +183,20 @@ export function Contact() {
         .contact__card--slate  .contact__card-icon { color: #cbd5e1; background: rgba(148,163,184,0.08); }
         .contact__card--blue   .contact__card-icon { color: #93c5fd; background: rgba(59,130,246,0.1); }
 
+        /* Light mode: make icon glyphs dark enough for contrast */
+        :root[data-theme="light"] .contact__card--violet .contact__card-icon {
+          color: var(--accent);
+          background: rgba(112,42,225,0.12);
+        }
+        :root[data-theme="light"] .contact__card--slate .contact__card-icon {
+          color: var(--text-muted);
+          background: rgba(89,92,94,0.10);
+        }
+        :root[data-theme="light"] .contact__card--blue .contact__card-icon {
+          color: var(--accent2);
+          background: rgba(0,98,140,0.12);
+        }
+
         .contact__card-info {
           flex: 1;
           display: flex;

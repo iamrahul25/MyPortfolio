@@ -109,6 +109,14 @@ export function Hero() {
             radial-gradient(ellipse 30% 50% at 100% 50%, rgba(8,11,18,0.6) 0%, transparent 60%);
           pointer-events: none;
           z-index: 1;
+          transition: background 0.35s ease;
+        }
+        [data-theme="light"] .hero__vignette {
+          background:
+            radial-gradient(ellipse 80% 60% at 50% 100%, rgba(245,246,250,0.90) 0%, transparent 70%),
+            radial-gradient(ellipse 60% 40% at 50% 0%, rgba(245,246,250,0.55) 0%, transparent 60%),
+            radial-gradient(ellipse 30% 50% at 0% 50%, rgba(245,246,250,0.65) 0%, transparent 60%),
+            radial-gradient(ellipse 30% 50% at 100% 50%, rgba(245,246,250,0.65) 0%, transparent 60%);
         }
 
         /* ── Layout ────────────── */
@@ -222,6 +230,12 @@ export function Hero() {
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
+        [data-theme="light"] .hero__name {
+          background: linear-gradient(135deg, #1e1b4b 20%, #7c3aed 60%, var(--accent2));
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
 
         .hero__tagline {
           color: var(--text-muted);
@@ -253,6 +267,18 @@ export function Hero() {
           background: rgba(124,58,237,0.2);
           border-color: rgba(124,58,237,0.5);
           transform: translateY(-1px);
+        }
+
+        /* Light mode: make tech pills readable */
+        :root[data-theme="light"] .hero__tech-pill {
+          background: rgba(112,42,225,0.08);
+          border-color: rgba(112,42,225,0.18);
+          color: var(--accent);
+        }
+        :root[data-theme="light"] .hero__tech-pill:hover {
+          background: rgba(112,42,225,0.14);
+          border-color: rgba(112,42,225,0.30);
+          box-shadow: 0 4px 16px rgba(112,42,225,0.10);
         }
 
         .hero__actions {

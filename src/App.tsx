@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Hero } from './components/Hero'
 import { About } from './components/About'
 import { Resume } from './components/Resume'
@@ -10,10 +10,21 @@ import './App.css'
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isDark, setIsDark] = useState<boolean>(() => {
+    const stored = localStorage.getItem('portfolio-theme')
+    return stored !== null ? stored === 'dark' : true
+  })
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light')
+    localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light')
+  }, [isDark])
+
+  const toggleTheme = () => setIsDark(prev => !prev)
 
   return (
     <>
-      <Nav mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
+      <Nav mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} isDark={isDark} toggleTheme={toggleTheme} />
       <main>
         <Hero />
         <About />

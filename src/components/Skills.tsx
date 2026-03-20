@@ -230,6 +230,106 @@ export function Skills() {
           background: rgba(249,115,22,0.16);
           box-shadow: 0 4px 16px rgba(249,115,22,0.12);
         }
+
+        /* Light mode: strengthen text/background contrast */
+        :root[data-theme="light"] .skills__item--violet {
+          color: var(--accent);
+          background: rgba(112,42,225,0.08);
+          border-color: rgba(112,42,225,0.18);
+        }
+        :root[data-theme="light"] .skills__item--violet .skills__dot { background: var(--accent); }
+        :root[data-theme="light"] .skills__item--violet:hover {
+          background: rgba(112,42,225,0.14);
+          box-shadow: 0 4px 16px rgba(112,42,225,0.14);
+        }
+
+        :root[data-theme="light"] .skills__item--yellow {
+          color: #8a6a00;
+          background: rgba(180,83,9,0.10);
+          border-color: rgba(180,83,9,0.22);
+        }
+        :root[data-theme="light"] .skills__item--yellow .skills__dot { background: #b45309; }
+        :root[data-theme="light"] .skills__item--yellow:hover {
+          background: rgba(180,83,9,0.16);
+          box-shadow: 0 4px 16px rgba(180,83,9,0.12);
+        }
+
+        :root[data-theme="light"] .skills__item--blue {
+          color: #1d4ed8;
+          background: rgba(29,78,216,0.10);
+          border-color: rgba(29,78,216,0.22);
+        }
+        :root[data-theme="light"] .skills__item--blue .skills__dot { background: #2563eb; }
+        :root[data-theme="light"] .skills__item--blue:hover {
+          background: rgba(29,78,216,0.16);
+          box-shadow: 0 4px 16px rgba(29,78,216,0.12);
+        }
+
+        :root[data-theme="light"] .skills__item--green {
+          color: #15803d;
+          background: rgba(22,163,74,0.10);
+          border-color: rgba(22,163,74,0.22);
+        }
+        :root[data-theme="light"] .skills__item--green .skills__dot { background: #16a34a; }
+        :root[data-theme="light"] .skills__item--green:hover {
+          background: rgba(22,163,74,0.16);
+          box-shadow: 0 4px 16px rgba(22,163,74,0.10);
+        }
+
+        :root[data-theme="light"] .skills__item--cyan {
+          color: #0e7490;
+          background: rgba(0,98,140,0.10);
+          border-color: rgba(0,98,140,0.22);
+        }
+        :root[data-theme="light"] .skills__item--cyan .skills__dot { background: var(--accent2); }
+        :root[data-theme="light"] .skills__item--cyan:hover {
+          background: rgba(0,98,140,0.16);
+          box-shadow: 0 4px 16px rgba(0,98,140,0.10);
+        }
+
+        :root[data-theme="light"] .skills__item--slate {
+          color: #475569;
+          background: rgba(148,163,184,0.16);
+          border-color: rgba(100,116,139,0.28);
+        }
+        :root[data-theme="light"] .skills__item--slate .skills__dot { background: #64748b; }
+        :root[data-theme="light"] .skills__item--slate:hover {
+          background: rgba(148,163,184,0.20);
+          box-shadow: 0 4px 16px rgba(71,85,105,0.08);
+        }
+
+        :root[data-theme="light"] .skills__item--amber {
+          color: #b45309;
+          background: rgba(245,158,11,0.14);
+          border-color: rgba(180,83,9,0.25);
+        }
+        :root[data-theme="light"] .skills__item--amber .skills__dot { background: #f59e0b; }
+        :root[data-theme="light"] .skills__item--amber:hover {
+          background: rgba(245,158,11,0.20);
+          box-shadow: 0 4px 16px rgba(245,158,11,0.12);
+        }
+
+        :root[data-theme="light"] .skills__item--pink {
+          color: #9d174d;
+          background: rgba(244,114,182,0.14);
+          border-color: rgba(190,24,93,0.22);
+        }
+        :root[data-theme="light"] .skills__item--pink .skills__dot { background: #e11d48; }
+        :root[data-theme="light"] .skills__item--pink:hover {
+          background: rgba(244,114,182,0.20);
+          box-shadow: 0 4px 16px rgba(225,29,72,0.10);
+        }
+
+        :root[data-theme="light"] .skills__item--orange {
+          color: #9a3412;
+          background: rgba(249,115,22,0.14);
+          border-color: rgba(249,115,22,0.25);
+        }
+        :root[data-theme="light"] .skills__item--orange .skills__dot { background: #f97316; }
+        :root[data-theme="light"] .skills__item--orange:hover {
+          background: rgba(249,115,22,0.20);
+          box-shadow: 0 4px 16px rgba(249,115,22,0.10);
+        }
       `}</style>
     </section>
   )

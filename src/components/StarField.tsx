@@ -24,12 +24,19 @@ interface StaticStar {
   twinkleOffset: number
 }
 
-// ── Nuro.dev-style: subtle gray/white meteor palette ───────────
-const METEOR_COLORS = [
+// ── Meteor palettes (darker for light mode) ─────────────────────
+const METEOR_COLORS_DARK = [
   '#f3f4f6',   // gray-100
   '#e5e7eb',   // gray-200
   '#d1d5db',   // gray-300
   '#ffffff',   // white
+]
+
+const METEOR_COLORS_LIGHT = [
+  '#9ca3af',   // gray-400
+  '#6b7280',   // gray-500
+  '#4b5563',   // gray-600
+  '#374151',   // gray-700
 ]
 
 // ── Helpers ────────────────────────────────────────────────────
@@ -37,8 +44,8 @@ function rand(a: number, b: number) {
   return a + Math.random() * (b - a)
 }
 
-function randomMeteorColor() {
-  return METEOR_COLORS[Math.floor(Math.random() * METEOR_COLORS.length)]
+function randomMeteorColor(meteorColors: string[]) {
+  return meteorColors[Math.floor(Math.random() * meteorColors.length)]
 }
 
 // ── Fixed direction: ALL meteors share the same angle → parallel lines ──
@@ -48,7 +55,7 @@ const METEOR_ANGLE_RAD = (120 * Math.PI) / 180
 const METEOR_DX = Math.cos(METEOR_ANGLE_RAD)  // -0.5
 const METEOR_DY = Math.sin(METEOR_ANGLE_RAD)  // +0.866
 
-function spawnMeteor(w: number): Meteor {
+function spawnMeteor(w: number, meteorColors: string[]): Meteor {
   // Spawn across full width + overflow so left, center, and right all get falling stars (meteors move left).
   const x = rand(-80, w + 240)
   const y = rand(-55, -12)
@@ -67,7 +74,7 @@ function spawnMeteor(w: number): Meteor {
     speed,
     opacity: rand(0.6, 1),
     width: rand(0.5, 1.2),   // thin trail like nuro (h-0.5 ≈ 2px)
-    color: randomMeteorColor(),
+    color: randomMeteorColor(meteorColors),
     trail: [],
     dead: false,
   }
@@ -104,6 +111,16 @@ export function StarField() {
     let meteors: Meteor[] = []
     let time = 0
 
+    let isLight = document.documentElement.getAttribute('data-theme') === 'light'
+    let starRgb: [number, number, number] = isLight ? [107, 114, 128] : [255, 255, 255] // gray-500-ish vs white
+    let meteorColors: string[] = isLight ? METEOR_COLORS_LIGHT : METEOR_COLORS_DARK
+
+    function applyTheme() {
+      isLight = document.documentElement.getAttribute('data-theme') === 'light'
+      starRgb = isLight ? [107, 114, 128] : [255, 255, 255]
+      meteorColors = isLight ? METEOR_COLORS_LIGHT : METEOR_COLORS_DARK
+    }
+
     // ── Resize ──────────────────────────────────────────
     function resize() {
       const parent = canvas!.parentElement
@@ -120,8 +137,8 @@ export function StarField() {
       staticStars = Array.from({ length: count }, () => ({
         x: Math.random() * W,
         y: Math.random() * H,
-        r: rand(0.3, 1.4),
-        opacity: rand(0.08, 0.55),
+        r: rand(isLight ? 0.4 : 0.3, isLight ? 1.6 : 1.4),
+        opacity: rand(isLight ? 0.12 : 0.08, isLight ? 0.75 : 0.55),
         twinkleSpeed: rand(0.002, 0.0067),
         twinkleOffset: Math.random() * Math.PI * 2,
       }))
@@ -133,7 +150,7 @@ export function StarField() {
         const o = s.opacity * (0.55 + 0.45 * Math.sin(t * s.twinkleSpeed + s.twinkleOffset))
         ctx!.beginPath()
         ctx!.arc(s.x, s.y, s.r, 0, Math.PI * 2)
-        ctx!.fillStyle = `rgba(255,255,255,${o.toFixed(3)})`
+        ctx!.fillStyle = `rgba(${starRgb[0]},${starRgb[1]},${starRgb[2]},${o.toFixed(3)})`
         ctx!.fill()
       }
     }
@@ -177,7 +194,7 @@ export function StarField() {
     // Seed meteors across full width so right side isn’t empty at start
     function seedInitialMeteors() {
       for (let i = 0; i < 4; i++) {
-        const m = spawnMeteor(W)
+        const m = spawnMeteor(W, meteorColors)
         const preSteps = Math.floor(rand(5, 75))
         for (let s = 0; s < preSteps; s++) {
           m.x += m.vx
@@ -200,8 +217,8 @@ export function StarField() {
       spawnTimer++
       if (spawnTimer >= BASE_INTERVAL) {
         spawnTimer = 0
-        meteors.push(spawnMeteor(W))
-        if (Math.random() < 0.1) setTimeout(() => meteors.push(spawnMeteor(W)), 120)
+        meteors.push(spawnMeteor(W, meteorColors))
+        if (Math.random() < 0.1) setTimeout(() => meteors.push(spawnMeteor(W, meteorColors)), 120)
       }
 
       // Update & render meteors
@@ -221,9 +238,23 @@ export function StarField() {
       rafRef.current = requestAnimationFrame(tick)
     }
 
+    applyTheme()
     resize()
     seedInitialMeteors()
     rafRef.current = requestAnimationFrame(tick)
+
+    const mo = new MutationObserver(() => {
+      // Rebuild particles with updated colors when theme changes.
+      applyTheme()
+      buildStaticStars()
+      meteors = []
+      seedInitialMeteors()
+      ctx.clearRect(0, 0, W, H)
+    })
+    mo.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    })
 
     const ro = new ResizeObserver(resize)
     ro.observe(canvas.parentElement ?? document.body)
@@ -231,6 +262,7 @@ export function StarField() {
     return () => {
       cancelAnimationFrame(rafRef.current)
       ro.disconnect()
+      mo.disconnect()
     }
   }, [])
 
