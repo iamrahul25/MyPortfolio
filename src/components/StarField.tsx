@@ -107,6 +107,7 @@ export function StarField() {
     if (!ctx) return
 
     let W = 0, H = 0
+    let dpr = 1
     let staticStars: StaticStar[] = []
     let meteors: Meteor[] = []
     let time = 0
@@ -124,10 +125,26 @@ export function StarField() {
     // ── Resize ──────────────────────────────────────────
     function resize() {
       const parent = canvas!.parentElement
-      W = parent ? parent.clientWidth  : window.innerWidth
-      H = parent ? parent.clientHeight : window.innerHeight
-      canvas!.width  = W
-      canvas!.height = H
+
+      // Use CSS pixels for the simulation/drawing coordinates, but allocate
+      // the canvas backing store in device pixels to avoid blurry rendering.
+      const cssW = parent ? parent.clientWidth : window.innerWidth
+      const cssH = parent ? parent.clientHeight : window.innerHeight
+
+      dpr = Math.max(1, window.devicePixelRatio || 1)
+      W = cssW
+      H = cssH
+
+      canvas!.width = Math.floor(cssW * dpr)
+      canvas!.height = Math.floor(cssH * dpr)
+
+      // Keep the layout size in CSS pixels (matches how W/H are calculated).
+      canvas!.style.width = `${cssW}px`
+      canvas!.style.height = `${cssH}px`
+
+      // Draw in CSS pixel coordinates; the transform maps them to device pixels.
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0)
+      ctx!.imageSmoothingEnabled = true
       buildStaticStars()
     }
 
@@ -258,11 +275,13 @@ export function StarField() {
 
     const ro = new ResizeObserver(resize)
     ro.observe(canvas.parentElement ?? document.body)
+    window.addEventListener('resize', resize)
 
     return () => {
       cancelAnimationFrame(rafRef.current)
       ro.disconnect()
       mo.disconnect()
+      window.removeEventListener('resize', resize)
     }
   }, [])
 
