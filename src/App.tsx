@@ -6,6 +6,8 @@ import { Skills } from './components/Skills'
 import { Projects } from './components/Projects'
 import { Contact } from './components/Contact'
 import { Nav } from './components/Nav'
+import ParticleCursor from './components/ParticleCursor'
+import { ThemeProvider } from './context/ThemeContext'
 import './App.css'
 
 function App() {
@@ -23,7 +25,8 @@ function App() {
   const toggleTheme = () => setIsDark(prev => !prev)
 
   return (
-    <>
+    <ThemeProvider isDark={isDark} toggleTheme={toggleTheme}>
+      <ParticleCursor />
       <Nav mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} isDark={isDark} toggleTheme={toggleTheme} />
       <main>
         <Hero />
@@ -33,7 +36,7 @@ function App() {
         <Skills />
         <Contact />
       </main>
-    </>
+    </ThemeProvider>
   )
 }
 
