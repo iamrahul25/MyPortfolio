@@ -4,6 +4,7 @@ import { About } from './components/About'
 import { Resume } from './components/Resume'
 import { Skills } from './components/Skills'
 import { Projects } from './components/Projects'
+import { Experience } from './components/Experience'
 import { Contact } from './components/Contact'
 import { Nav } from './components/Nav'
 import ParticleCursor from './components/ParticleCursor'
@@ -32,6 +33,7 @@ function App() {
         <Hero />
         <About />
         <Projects />
+        <Experience />
         <Resume />
         <Skills />
         <Contact />

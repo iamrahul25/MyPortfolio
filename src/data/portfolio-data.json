@@ -80,6 +80,44 @@
       "tags": ["React Native", "JavaScript", "Expo"]
     }
   ],
+  "experience": [
+    {
+      "title": "DevOps",
+      "company": "IBM",
+      "location": "Bengaluru, India",
+      "dateRange": "Oct 2024 — Present",
+      "current": true,
+      "summary": "Automation, deployment validation, and observability for reliable enterprise releases.",
+      "bullets": [
+        "Automated pre-deployment and post-deployment validation checks using Python and shell scripts, reducing manual verification time by 80% and improving deployment reliability.",
+        "Developed automation scripts in Python to detect gaps and mismatches between configuration and data in GitHub repositories and deployed servers, ensuring environment consistency and preventing drift-related issues.",
+        "Built dashboards for end-to-end observability, visualizing metrics such as CPU usage, memory, disk I/O, and application logs to monitor system health and performance in real time."
+      ],
+      "skills": [
+        "Python",
+        "Bash",
+        "Docker",
+        "Kubernetes",
+        "Ansible",
+        "Prometheus",
+        "Grafana"
+      ]
+    },
+    {
+      "title": "Web Development Intern",
+      "company": "DRDO (Defence Research & Development Organisation)",
+      "location": "Delhi, India",
+      "dateRange": "Dec 2022 — Mar 2023",
+      "current": false,
+      "summary": "Institutional repository software and digital asset management for defense research.",
+      "bullets": [
+        "Worked on DSpace, an open-source repository software, to manage digital assets for the organization.",
+        "Developed Institutional Repository (IR) software used for managing documents, research papers, and other assets.",
+        "Strengthened soft skills including leadership, teamwork, handling pressure, and effective communication."
+      ],
+      "skills": ["Java", "JSP", "XML", "SQL", "HTML", "CSS"]
+    }
+  ],
   "resume": {
     "pdfUrl": "/static/Resume-2026.pdf",
     "fileName": "Resume-2026.pdf"

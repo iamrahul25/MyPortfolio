@@ -25,6 +25,16 @@ export interface PortfolioData {
     image?: string
     tags: string[]
   }[]
+  experience: {
+    title: string
+    company: string
+    location: string
+    dateRange: string
+    current?: boolean
+    summary: string
+    bullets: string[]
+    skills: string[]
+  }[]
   resume: {
     pdfUrl: string
     fileName: string

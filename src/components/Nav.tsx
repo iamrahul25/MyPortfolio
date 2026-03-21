@@ -12,6 +12,7 @@ const LINKS = [
   { href: '#hero',     label: 'Home',     icon: 'home' },
   { href: '#about',    label: 'About',    icon: 'info' },
   { href: '#projects', label: 'Projects', icon: 'folder' },
+  { href: '#experience', label: 'Experience', icon: 'briefcase' },
   { href: '#resume',   label: 'Resume',   icon: 'file-text' },
   { href: '#skills',   label: 'Skills',   icon: 'code' },
   { href: '#contact',  label: 'Contact',  icon: 'mail' },
